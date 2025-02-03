@@ -12,12 +12,21 @@ function App() {
     setProduct("");
   };
 
+  const handleDelete = (index) => {
+    setList((current) =>
+      current.filter((product, productIndex) => productIndex != index)
+    );
+  };
+
   return (
     <div className="container">
       <h1>Lista Spesa</h1>
       <ul>
         {List.map((product, index) => (
-          <li key={index}>{product}</li>
+          <div className="list-container">
+            <button onClick={() => handleDelete(index)}>🗑</button>
+            <li key={index}>{product}</li>
+          </div>
         ))}
       </ul>
       <hr />
