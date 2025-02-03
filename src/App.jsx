@@ -7,9 +7,23 @@ function App() {
   const sumbit = (e) => {
     e.preventDefault();
 
-    setList((current) => [...current, product]);
+    const trimmedProduct = product.trim();
 
+    if (trimmedProduct === "" || trimmedProduct === "Inserisci il Prodotto!!") {
+      setProduct("Inserisci il Prodotto!!");
+      return;
+    }
+
+    setList((current) => [...current, product]);
     setProduct("");
+  };
+
+  const handleVerify = (e) => {
+    if (e.target.value === "Inserisci il Prodotto!!") {
+      setProduct("");
+    } else {
+      setProduct(e.target.value);
+    }
   };
 
   const handleDelete = (index) => {
@@ -35,9 +49,8 @@ function App() {
         <input
           type="text"
           value={product}
-          onChange={(e) => {
-            setProduct(e.target.value);
-          }}
+          onChange={handleVerify}
+          className="error"
         />
         <button type="submit">Invia</button>
       </form>
